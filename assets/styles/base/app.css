@@ -1,0 +1,23 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.page__content {
+  min-height: calc(100vh - 175px);
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 .5rem;
+}
+
+.block__title {
+  margin-bottom: 1.5rem;
+  color: rgb(var(--primary-color));
+}
