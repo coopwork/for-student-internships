@@ -52,6 +52,9 @@ async function getProducts() {
       className: "product__cart__action__btn",
       text: "Добавить в корзину",
       attrs: { "data-cart-action": "add_to_cart" },
+      on: {
+        click: () => add_to_cart(item)
+      }
     });
 
     const buttonRemove = createElement({
@@ -94,7 +97,7 @@ async function getProducts() {
       tag: "article",
       className: "product__card",
       attrs: {
-        "data-in-cart": "false",
+        "data-in-cart": "false", "data-id": item.id,
       },
       children: [img, title, product__pay, product__infoDiv],
     });
@@ -107,13 +110,26 @@ getProducts();
 
 function add_to_cart(product) {
   console.log(product);
+
+  const product__card = document.querySelector(`[data-id="${product.id}"]`)
+
+  product__card.setAttribute("data-in-cart", "true")
+
+  console.log(product__card);
+  
+
   shoppingCartItems.push(product);
 }
+
 
 function removeFromCart(product_id) {
   console.log(product_id);
 
+  const product__card = document.querySelector(`[data-id="${product_id}"]`)
+
+  product__card.setAttribute("data-in-cart", "false")
+
   shoppingCartItems = shoppingCartItems.filter(
-    (item) => item.id !== product_id
+    (item) => item.id !== product_id, 
   );
 }
