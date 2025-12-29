@@ -18,7 +18,7 @@ shoppingCartElements.window.addEventListener("click", (event) => {
     shoppingCartElements.window.setAttribute("data-open", "false");
 });
 
-const shoppingCartItems = [];
+let shoppingCartItems = [];
 
 async function getProducts() {
   const products = await fetchProducts();
@@ -59,6 +59,9 @@ async function getProducts() {
       className: "product__cart__action__btn",
       text: "Убрать из корзины",
       attrs: { "data-cart-action": "delete_from_cart" },
+      on: {
+        click: () => removeFromCart(item.id),
+      },
     });
 
     const product__pay = createElement({
@@ -67,19 +70,25 @@ async function getProducts() {
       children: [product__price, buttonAdd, buttonRemove],
     });
 
-
-
     const ulINgredient = createElement({
-      tag: "ul", className: "product__ingridients", children: item.ingredients.map(ing => createElement({ tag: "li", text: ing }))
-    })
+      tag: "ul",
+      className: "product__ingridients",
+      children: item.ingredients.map((ing) =>
+        createElement({ tag: "li", text: ing })
+      ),
+    });
 
     const product__info__iconDiv = createElement({
-      tag: "div", className: "product__info__icon", text: "i"
-    })
+      tag: "div",
+      className: "product__info__icon",
+      text: "i",
+    });
 
     const product__infoDiv = createElement({
-      tag: "div", className: "product__info", children: [product__info__iconDiv, ulINgredient]
-    })
+      tag: "div",
+      className: "product__info",
+      children: [product__info__iconDiv, ulINgredient],
+    });
 
     const article = createElement({
       tag: "article",
@@ -97,7 +106,14 @@ async function getProducts() {
 getProducts();
 
 function add_to_cart(product) {
-
+  console.log(product);
   shoppingCartItems.push(product);
+}
 
+function removeFromCart(product_id) {
+  console.log(product_id);
+
+  shoppingCartItems = shoppingCartItems.filter(
+    (item) => item.id !== product_id
+  );
 }

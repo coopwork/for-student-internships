@@ -1,174 +1,187 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Лайв кодинг урок по реализации корзины товаров и вывод списка товаров через JS"
+    />
+    <link
+      rel="shortcut icon"
+      href="./assets/icons/favicon.png"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./assets/styles/index.css" />
+    <script defer type="module" src="./index.js"></script>
+    <title>Урок №17</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Лайв кодинг урок по реализации корзины товаров и вывод списка товаров через JS">
-  <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon">
-  <link rel="stylesheet" href="./assets/styles/index.css">
-  <script defer type="module" src="./index.js"></script>
-  <title>Урок №17</title>
-</head>
+  <body>
+    <header class="main__header">
+      <div class="container main__header__wrapper">
+        <h1 class="main__header__logo">Урок №17</h1>
 
-<body>
-  <header class="main__header">
-    <div class="container main__header__wrapper">
-      <h1 class="main__header__logo">Урок №17</h1>
+        <div class="main__header__actions">
+          <nav class="main__header__nav">
+            <a href="#products" class="header__nav__link">Пицца</a>
+            <a href="#products" class="header__nav__link">Бургеры</a>
+          </nav>
+          <button class="shopping__cart__btn" data-count="1">
+            <img src="./assets/icons/shopping-cart.svg" alt="Корзина" />
+          </button>
 
-      <div class="main__header__actions">
-        <nav class="main__header__nav">
-          <a href="#products" class="header__nav__link">Пицца</a>
-          <a href="#products" class="header__nav__link">Бургеры</a>
-        </nav>
-        <button class="shopping__cart__btn" data-count="1">
-          <img src="./assets/icons/shopping-cart.svg" alt="Корзина">
-        </button>
+          <div class="shopping__cart" data-open="false">
+            <div class="cart__window">
+              <div class="shopping__cart__info">
+                <h2>11000 тг</h2>
+                <div class="shopping__cart__actions">
+                  <button class="shopping__cart__close__btn">Закрыть</button>
+                  <button class="shopping__cart__pay__btn">Оплатить</button>
+                </div>
+              </div>
 
-        <div class="shopping__cart" data-open="false">
+              <div class="cart__products">
+                <article class="product__card">
+                  <img
+                    class="product__cover"
+                    src="./assets/images/products/bbq-premium.png"
+                    alt="Барбейю Премиум"
+                  />
+                  <div class="product__pay">
+                    <h4 class="product__title">Барбекю Премиум</h4>
+                    <p>5500 тг.</p>
+                    <button
+                      class="product__cart__action__btn"
+                      data-cart-action="delete_from_cart"
+                    >
+                      Убрать из корзины
+                    </button>
+                  </div>
+                </article>
 
-          <div class="cart__window">
-
-            <div class="shopping__cart__info">
-              <h2>11000 тг</h2>
-              <div class="shopping__cart__actions">
-                <button class="shopping__cart__close__btn">Закрыть</button>
-                <button class="shopping__cart__pay__btn">Оплатить</button>
+                <article class="product__card">
+                  <img
+                    class="product__cover"
+                    src="./assets/images/products/bbq-premium.png"
+                    alt="Барбейю Премиум"
+                  />
+                  <div class="product__pay">
+                    <h4 class="product__title">Барбекю Премиум</h4>
+                    <p>5500 тг.</p>
+                    <button
+                      class="product__cart__action__btn"
+                      data-cart-action="delete_from_cart"
+                    >
+                      Убрать из корзины
+                    </button>
+                  </div>
+                </article>
               </div>
             </div>
-
-            <div class="cart__products">
-              <article class="product__card">
-                <img class="product__cover" src="./assets/images/products/bbq-premium.png" alt="Барбейю Премиум">
-                <div class="product__pay">
-                  <h4 class="product__title">Барбекю Премиум</h4>
-                  <p>5500 тг.</p>
-                  <button class="product__cart__action__btn" data-cart-action="delete_from_cart">Убрать из
-                    корзины</button>
-                </div>
-              </article>
-
-              <article class="product__card">
-                <img class="product__cover" src="./assets/images/products/bbq-premium.png" alt="Барбейю Премиум">
-                <div class="product__pay">
-                  <h4 class="product__title">Барбекю Премиум</h4>
-                  <p>5500 тг.</p>
-                  <button class="product__cart__action__btn" data-cart-action="delete_from_cart">Убрать из
-                    корзины</button>
-                </div>
-              </article>
-            </div>
-
           </div>
-
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main class="page__content">
-
-    <section id="products" class="container">
-      <h3 class="block__title">Пицца</h3>
-      <div class="container products">
-
-        <article data-in-cart="true" class="product__card">
-          <img class="product__cover" src="./assets/images/products/bbq-premium.png" alt="Барбекйю Премиум">
-          <h4 class="product__title">Барбекю Премиум</h4>
-          <div class="product__pay">
-            <p>5500 тг.</p>
-            <button class="product__cart__action__btn" data-cart-action="add_to_cart">Добавить в корзину</button>
-            <button class="product__cart__action__btn" data-cart-action="delete_from_cart">Убрать из корзины</button>
-          </div>
-          <div class="product__info">
-            <div class="product__info__icon">
-              i
+    <main class="page__content">
+      <section id="products" class="container">
+        <h3 class="block__title">Пицца</h3>
+        <div class="container products">
+          <article data-in-cart="true" class="product__card">
+            <img
+              class="product__cover"
+              src="./assets/images/products/bbq-premium.png"
+              alt="Барбекйю Премиум"
+            />
+            <h4 class="product__title">Барбекю Премиум</h4>
+            <div class="product__pay">
+              <p>5500 тг.</p>
+              <button
+                class="product__cart__action__btn"
+                data-cart-action="add_to_cart"
+              >
+                Добавить в корзину
+              </button>
+              <button
+                class="product__cart__action__btn"
+                data-cart-action="delete_from_cart"
+              >
+                Убрать из корзины
+              </button>
             </div>
-            <ul class="product__ingridients">
-              <li>
-                Свинина BBQ
-              </li>
-              <li>
-                соус Барбекю
-              </li>
-              <li>
-                сыр, курица
-              </li>
-              <li>
-                соус для пиццы
-              </li>
-              <li>
-                соус чили
-              </li>
-            </ul>
-          </div>
-        </article>
-
-        <article data-in-cart="false" class="product__card">
-          <img class="product__cover" src="./assets/images/products/bbq-premium.png" alt="Барбейю Премиум">
-          <h4 class="product__title">Барбекю Премиум</h4>
-          <div class="product__pay">
-            <p>5500 тг.</p>
-            <button class="product__cart__action__btn" data-cart-action="add_to_cart">Добавить в корзину</button>
-            <button class="product__cart__action__btn" data-cart-action="delete_from_cart">Убрать из корзины</button>
-          </div>
-          <div class="product__info">
-            <div class="product__info__icon">
-              i
+            <div class="product__info">
+              <div class="product__info__icon">i</div>
+              <ul class="product__ingridients">
+                <li>Свинина BBQ</li>
+                <li>соус Барбекю</li>
+                <li>сыр, курица</li>
+                <li>соус для пиццы</li>
+                <li>соус чили</li>
+              </ul>
             </div>
-            <ul class="product__ingridients">
-              <li>
-                Свинина BBQ
-              </li>
-              <li>
-                соус Барбекю
-              </li>
-              <li>
-                сыр, курица
-              </li>
-              <li>
-                соус для пиццы
-              </li>
-              <li>
-                соус чили
-              </li>
-            </ul>
-          </div>
-        </article>
+          </article>
 
+          <article data-in-cart="false" class="product__card">
+            <img
+              class="product__cover"
+              src="./assets/images/products/bbq-premium.png"
+              alt="Барбейю Премиум"
+            />
+            <h4 class="product__title">Барбекю Премиум</h4>
+            <div class="product__pay">
+              <p>5500 тг.</p>
+              <button
+                class="product__cart__action__btn"
+                data-cart-action="add_to_cart"
+              >
+                Добавить в корзину
+              </button>
+              <button
+                class="product__cart__action__btn"
+                data-cart-action="delete_from_cart"
+              >
+                Убрать из корзины
+              </button>
+            </div>
+            <div class="product__info">
+              <div class="product__info__icon">i</div>
+              <ul class="product__ingridients">
+                <li>Свинина BBQ</li>
+                <li>соус Барбекю</li>
+                <li>сыр, курица</li>
+                <li>соус для пиццы</li>
+                <li>соус чили</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main__footer">
+      <div class="container main__footer__wrapper">
+        <h2 class="main__footer__logo">Урок №17</h2>
+
+        <div class="footer__col">
+          <h4>Навигация</h4>
+          <nav class="footer__nav">
+            <a href="#products" class="footer__nav__link">Пицца</a>
+            <a href="#" class="footer__nav__link">Бургеры</a>
+          </nav>
+        </div>
+
+        <div class="footer__col">
+          <h4>Доставка</h4>
+          <nav class="footer__nav">
+            <a href="#" class="footer__nav__link">Правила доставки</a>
+          </nav>
+        </div>
       </div>
-    </section>
 
-  </main>
-
-  <footer class="main__footer">
-    <div class="container main__footer__wrapper">
-
-      <h2 class="main__footer__logo">Урок №17</h2>
-
-      <div class="footer__col">
-        <h4>Навигация</h4>
-        <nav class="footer__nav">
-          <a href="#products" class="footer__nav__link">Пицца</a>
-          <a href="#" class="footer__nav__link">Бургеры</a>
-        </nav>
+      <div class="main__footer__copyright">
+        <p class="copyright">Урок №17 &copy; 2026 все права защищены.</p>
       </div>
-
-      <div class="footer__col">
-        <h4>Доставка</h4>
-        <nav class="footer__nav">
-          <a href="#" class="footer__nav__link">Правила доставки</a>
-        </nav>
-      </div>
-
-    </div>
-
-    <div class="main__footer__copyright">
-      <p class="copyright">
-        Урок №17 &copy; 2026 все права защищены.
-      </p>
-    </div>
-  </footer>
-</body>
-
+    </footer>
+  </body>
 </html>
