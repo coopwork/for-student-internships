@@ -70,7 +70,7 @@ async function getProducts() {
 
 
     const ulINgredient = createElement({
-      tag: "ul", className: "product__ingridients",children: item.ingredients.map(ing => createElement({tag: "li", text: ing}))
+      tag: "ul", className: "product__ingridients", children: item.ingredients.map(ing => createElement({ tag: "li", text: ing }))
     })
 
     const product__info__iconDiv = createElement({
@@ -78,7 +78,7 @@ async function getProducts() {
     })
 
     const product__infoDiv = createElement({
-      tag: "div", className:"product__info", children: [product__info__iconDiv, ulINgredient]
+      tag: "div", className: "product__info", children: [product__info__iconDiv, ulINgredient]
     })
 
     const article = createElement({
@@ -87,7 +87,7 @@ async function getProducts() {
       attrs: {
         "data-in-cart": "false",
       },
-      children: [img, title, product__pay],
+      children: [img, title, product__pay, product__infoDiv],
     });
 
     document.querySelector(".products").appendChild(article);
@@ -98,6 +98,6 @@ getProducts();
 
 function add_to_cart(product) {
 
-  shoppingCartItems.push( product);
-  
+  shoppingCartItems.push(product);
+
 }
