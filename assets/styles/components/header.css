@@ -55,4 +55,21 @@
     width: 100%;
     height: 100%;
   }
+
+  &[data-count]::after {
+    content: attr(data-count);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -.25rem;
+    right: -.25rem;
+    background-color: rgb(var(--bg-color));
+    color: rgb(var(--primary-color));
+    font-size: .5rem;
+    width: .75rem;
+    height: .75rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
 }
