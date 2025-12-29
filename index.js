@@ -67,6 +67,20 @@ async function getProducts() {
       children: [product__price, buttonAdd, buttonRemove],
     });
 
+
+
+    const ulINgredient = createElement({
+      tag: "ul", className: "product__ingridients",children: item.ingredients.map(ing => createElement({tag: "li", text: ing}))
+    })
+
+    const product__info__iconDiv = createElement({
+      tag: "div", className: "product__info__icon", text: "i"
+    })
+
+    const product__infoDiv = createElement({
+      tag: "div", className:"product__info", children: [product__info__iconDiv, ulINgredient]
+    })
+
     const article = createElement({
       tag: "article",
       className: "product__card",
@@ -81,3 +95,9 @@ async function getProducts() {
 }
 
 getProducts();
+
+function add_to_cart(product) {
+
+  shoppingCartItems.push( product);
+  
+}
