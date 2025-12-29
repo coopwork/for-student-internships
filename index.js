@@ -29,20 +29,24 @@ async function getProducts() {
   console.log('Список продуктов', products);
   console.table(products);
 
-  products.forEach( item => {
-    const img = createElement({ tag: "img", className: "product__cover", attrs: {
-      src: item.image, alt: item.title
-    }
+  products.forEach(item => {
+    const img = createElement({
+      tag: "img", className: "product__cover", attrs: {
+        src: item.image, alt: item.title
+      }
 
-    })
-    const article = createElement({ tag: "article", className: "product__card", attrs: {
-      "data-in-cart": "false"
-    },
-      children: img
-    })
-    document.querySelector(".products") .appendChild(
+    });
+    
+    const article = createElement({
+      tag: "article", className: "product__card", attrs: {
+        "data-in-cart": "false"
+      },
+      children: [img]
+    });
+
+    document.querySelector(".products").appendChild(
       article
-    )
+    );
   })
 }
 
