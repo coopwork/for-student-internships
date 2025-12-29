@@ -30,14 +30,19 @@ async function getProducts() {
   console.table(products);
 
   products.forEach( item => {
-    const img = createElement({ tag: "img", className: "product__cover",
+    const img = createElement({ tag: "img", className: "product__cover", attrs: {
+      src: item.image, alt: item.title
+    }
 
     })
     const article = createElement({ tag: "article", className: "product__card", attrs: {
       "data-in-cart": "false"
-    }
-
+    },
+      children: img
     })
+    document.querySelector(".products") .appendChild(
+      article
+    )
   })
 }
 
