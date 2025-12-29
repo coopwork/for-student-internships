@@ -2,58 +2,82 @@ import { createElement } from "./assets/js/create-element.js";
 import { fetchProducts } from "./assets/js/fetch-products.js";
 
 const shoppingCartElements = {
-  window: document.querySelector('.shopping__cart'),
-  openBtn: document.querySelector('.shopping__cart__btn'),
-  closeBtn: document.querySelector('.shopping__cart__close__btn'),
+  window: document.querySelector(".shopping__cart"),
+  openBtn: document.querySelector(".shopping__cart__btn"),
+  closeBtn: document.querySelector(".shopping__cart__close__btn"),
 };
-shoppingCartElements.openBtn.addEventListener('click', () => {
-  shoppingCartElements.window.setAttribute('data-open', 'true')
+shoppingCartElements.openBtn.addEventListener("click", () => {
+  shoppingCartElements.window.setAttribute("data-open", "true");
 });
 
-shoppingCartElements.closeBtn.addEventListener('click', () => {
-  shoppingCartElements.window.setAttribute('data-open', 'false')
+shoppingCartElements.closeBtn.addEventListener("click", () => {
+  shoppingCartElements.window.setAttribute("data-open", "false");
 });
-shoppingCartElements.window.addEventListener('click', event => {
-  if (event.target.classList.contains('shopping__cart'))
-    shoppingCartElements.window.setAttribute('data-open', 'false')
+shoppingCartElements.window.addEventListener("click", (event) => {
+  if (event.target.classList.contains("shopping__cart"))
+    shoppingCartElements.window.setAttribute("data-open", "false");
 });
-
-
-
 
 const shoppingCartItems = [];
 
 async function getProducts() {
   const products = await fetchProducts();
 
-  console.log('Список продуктов', products);
+  console.log("Список продуктов", products);
   console.table(products);
 
-  products.forEach(item => {
+  products.forEach((item) => {
     const img = createElement({
-      tag: "img", className: "product__cover", attrs: {
-        src: item.image, alt: item.title
-      }
-
-    });
-    
-    const article = createElement({
-      tag: "article", className: "product__card", attrs: {
-        "data-in-cart": "false"
+      tag: "img",
+      className: "product__cover",
+      attrs: {
+        src: item.image,
+        alt: item.title,
       },
-      children: [img]
     });
 
-    document.querySelector(".products").appendChild(
-      article
-    );
-  })
+    const title = createElement({
+      tag: "h4",
+      className: "product__title",
+      text: item.title,
+    });
+
+    const product__price = createElement({
+      tag: "p",
+      text: `${item.price} тг.`,
+    });
+
+    const buttonAdd = createElement({
+      tag: "button",
+      className: "product__cart__action__btn",
+      text: "Добавить в корзину",
+      attrs: { "data-cart-action": "add_to_cart" },
+    });
+
+    const buttonRemove = createElement({
+      tag: "button",
+      className: "product__cart__action__btn",
+      text: "Убрать из корзины",
+      attrs: { "data-cart-action": "delete_from_cart" },
+    });
+
+    const product__pay = createElement({
+      tag: "div",
+      className: "product__pay",
+      children: [product__price, buttonAdd, buttonRemove],
+    });
+
+    const article = createElement({
+      tag: "article",
+      className: "product__card",
+      attrs: {
+        "data-in-cart": "false",
+      },
+      children: [img, title, product__pay],
+    });
+
+    document.querySelector(".products").appendChild(article);
+  });
 }
 
 getProducts();
-
-
-
-
-
-
