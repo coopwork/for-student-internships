@@ -192,6 +192,10 @@ function RenderCartItems(products) {
   products.forEach((product) => creatCartItem(product));
 
   const shopping__cart__sum = document.querySelector('.shopping__cart__sum')
+  console.log(shopping__cart__sum);
+
+  shopping__cart__sum.textContent = shoppingCartItems.reduce((acc, product) => acc + product.price, 0) + ' тг.'
+
   // console.log(shopping__cart__sum);
 
   shopping__cart__sum.textContent = shoppingCartItems.reduce((acc, product) => acc + product.price, 0)
@@ -199,13 +203,14 @@ function RenderCartItems(products) {
 
   const shopping__cart__btn = document.querySelector('.shopping__cart__btn')
   if (shoppingCartItems.length) {
-    shopping__cart__btn.setAttribute('data-count', shoppingCartItems.length)
-  } else {
-    shopping__cart__btn.removeAttribute('data-count')
+    if (shoppingCartItems.length) {
+      shopping__cart__btn.setAttribute('data-count', shoppingCartItems.length)
+    } else {
+      shopping__cart__btn.removeAttribute('data-count')
+    }
+    // console.log(shopping__cart__btn);
+
+    localStorage.setItem('shopping_cart', JSON.stringify(shoppingCartItems));
+
   }
-  // console.log(shopping__cart__btn);
-
-  localStorage.setItem('shopping_cart', JSON.stringify(shoppingCartItems));
-
 }
-
