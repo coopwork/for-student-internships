@@ -119,6 +119,7 @@ function add_to_cart(product) {
   console.log(product__card);
 
   shoppingCartItems.push(product);
+  RenderCartItems(shoppingCartItems);
 }
 
 function removeFromCart(product_id) {
@@ -131,6 +132,7 @@ function removeFromCart(product_id) {
   shoppingCartItems = shoppingCartItems.filter(
     (item) => item.id !== product_id
   );
+  RenderCartItems(shoppingCartItems);
 }
 
 function creatCartItem(product) {
@@ -141,22 +143,48 @@ function creatCartItem(product) {
       src: product.image,
       alt: product.title,
     },
-  },
+  });
 
-);
-  
+  const product__title = createElement({
+    tag: "h4",
+    text: product.title,
+    className: "product__title",
+  });
+
+  const product__price = createElement({
+    tag: "p",
+    text: product.price,
+  });
+
+  const product__btn = createElement({
+    tag: "button",
+    className: "product__cart__action__btn",
+    attrs: {
+      "data-cart-action": "delete_from_cart",
+    },
+    text: "Убрать из корзины",
+    on: {
+      click: () => removeFromCart(product.id),
+    },
+  });
 
   const product__pay = createElement({
-    tag: 'div',
-    className: 'product__pay'
+    tag: "div",
+    className: "product__pay",
+    children: [product__title, product__price, product__btn],
   });
+
   const article = createElement({
     tag: "article",
     className: "product__card",
+    children: [image, product__pay],
   });
 
+  document.querySelector(".cart__products").appendChild(article);
 }
 
 function RenderCartItems(products) {
+  document.querySelectorAll('.cart__products .product__card')
+  .forEach((product__card) => product__card.remove())
   products.forEach((product) => creatCartItem(product));
 }
