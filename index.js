@@ -18,13 +18,16 @@ shoppingCartElements.window.addEventListener("click", (event) => {
     shoppingCartElements.window.setAttribute("data-open", "false");
 });
 
-let shoppingCartItems = [];
+let shoppingCartItems = JSON.parse(localStorage.getItem('shopping_cart')) ?? [];
+
 
 async function getProducts() {
   const products = await fetchProducts();
 
-  console.log("Список продуктов", products);
-  console.table(products);
+  RenderCartItems(shoppingCartItems);
+
+  // console.log("Список продуктов", products);
+  // console.table(products);
 
   products.forEach((item) => {
     const img = createElement({
@@ -97,7 +100,7 @@ async function getProducts() {
       tag: "article",
       className: "product__card",
       attrs: {
-        "data-in-cart": "false",
+        "data-in-cart": shoppingCartItems.find((findItem) => findItem.id === item.id) ? "true" : "false",
         "data-id": item.id,
       },
       children: [img, title, product__pay, product__infoDiv],
@@ -110,20 +113,20 @@ async function getProducts() {
 getProducts();
 
 function add_to_cart(product) {
-  console.log(product);
+  // console.log(product);
 
   const product__card = document.querySelector(`[data-id="${product.id}"]`);
 
   product__card.setAttribute("data-in-cart", "true");
 
-  console.log(product__card);
+  // console.log(product__card);
 
   shoppingCartItems.push(product);
   RenderCartItems(shoppingCartItems);
 }
 
 function removeFromCart(product_id) {
-  console.log(product_id);
+  // console.log(product_id);
 
   const product__card = document.querySelector(`[data-id="${product_id}"]`);
 
@@ -185,24 +188,24 @@ function creatCartItem(product) {
 
 function RenderCartItems(products) {
   document.querySelectorAll('.cart__products .product__card')
-  .forEach((product__card) => product__card.remove())
+    .forEach((product__card) => product__card.remove())
   products.forEach((product) => creatCartItem(product));
 
   const shopping__cart__sum = document.querySelector('.shopping__cart__sum')
-  console.log(shopping__cart__sum);
-  
-  shopping__cart__sum.textContent = shoppingCartItems.reduce((acc, product) => acc+product.price, 0)
-  
+  // console.log(shopping__cart__sum);
+
+  shopping__cart__sum.textContent = shoppingCartItems.reduce((acc, product) => acc + product.price, 0)
+
 
   const shopping__cart__btn = document.querySelector('.shopping__cart__btn')
-  if(shoppingCartItems.length){
+  if (shoppingCartItems.length) {
     shopping__cart__btn.setAttribute('data-count', shoppingCartItems.length)
-  } else{
+  } else {
     shopping__cart__btn.removeAttribute('data-count')
   }
-  console.log(shopping__cart__btn);
-  
+  // console.log(shopping__cart__btn);
 
+  localStorage.setItem('shopping_cart', JSON.stringify(shoppingCartItems));
 
 }
 
