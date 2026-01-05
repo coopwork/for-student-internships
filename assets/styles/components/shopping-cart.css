@@ -1,5 +1,7 @@
 .shopping__cart[data-open="false"] {
-  display: none !important;
+  background-color: transparent;
+  pointer-events: none;
+  opacity: 0;
 }
 
 .shopping__cart {
@@ -10,15 +12,23 @@
   height: 100%;
   background-color: #00000061;
   backdrop-filter: blur(3px);
+  transition: all .33s ease-in-out;
 
   z-index: 10;
+}
+
+.shopping__cart[data-open="false"] .cart__window {
+  scale: 0;
+  top: 0%;
+  right: 0%;
+  transform: translate(200%, -150%);
 }
 
 .shopping__cart .cart__window {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  right: 50%;
+  transform: translate(50%, -50%);
   width: 95%;
   height: 95%;
   max-width: 500px;
@@ -27,6 +37,7 @@
   padding: 1.5rem;
   border-radius: 1.25rem;
   box-shadow: 0 0 1rem .5rem rgba(var(--foreground-color), .25);
+  transition: all .33s ease-in-out;
 }
 
 .shopping__cart .cart__window .cart__products {
