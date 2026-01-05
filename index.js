@@ -192,7 +192,7 @@ function RenderCartItems(products) {
   products.forEach((product) => creatCartItem(product));
 
   const shopping__cart__sum = document.querySelector('.shopping__cart__sum')
-  console.log(shopping__cart__sum);
+  // console.log(shopping__cart__sum);
 
   shopping__cart__sum.textContent = shoppingCartItems.reduce((acc, product) => acc + product.price, 0) + ' тг.'
 
