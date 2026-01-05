@@ -38,6 +38,7 @@
   border-radius: 1.25rem;
   box-shadow: 0 0 1rem .5rem rgba(var(--foreground-color), .25);
   transition: all .33s ease-in-out;
+  overflow-y: auto;
 }
 
 .shopping__cart .cart__window .cart__products {

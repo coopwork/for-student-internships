@@ -187,4 +187,22 @@ function RenderCartItems(products) {
   document.querySelectorAll('.cart__products .product__card')
   .forEach((product__card) => product__card.remove())
   products.forEach((product) => creatCartItem(product));
+
+  const shopping__cart__sum = document.querySelector('.shopping__cart__sum')
+  console.log(shopping__cart__sum);
+  
+  shopping__cart__sum.textContent = shoppingCartItems.reduce((acc, product) => acc+product.price, 0)
+  
+
+  const shopping__cart__btn = document.querySelector('.shopping__cart__btn')
+  if(shoppingCartItems.length){
+    shopping__cart__btn.setAttribute('data-count', shoppingCartItems.length)
+  } else{
+    shopping__cart__btn.removeAttribute('data-count')
+  }
+  console.log(shopping__cart__btn);
+  
+
+
 }
+
